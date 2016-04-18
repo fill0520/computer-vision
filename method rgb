@@ -1,0 +1,86 @@
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+
+public class s01 {
+    public static void pixelrgb(int pixel) {
+        int alpha = (pixel >> 24) & 0xff;
+        int red = (pixel >> 16) & 0xff;
+        int green = (pixel >> 8) & 0xff;
+        int blue = (pixel) & 0xff;
+
+
+    }
+
+    public static void main(String[] args) throws Exception {
+
+        BufferedImage image = ImageIO.read(new File("D:\\Desktop\\123.png"));
+        int i1 = image.getWidth();
+        int i2 = image.getHeight();
+        System.out.println(i1 + " " + i2);
+
+        int posx1 = 0;
+        int posy1 = 0;
+        int posx2 = 0;
+        int posy2 = 0;
+        int posx;
+        int posy;
+
+
+        for (int i = 0; i < i2; i++) {
+            for (int j = 0; j < i1; j++) {
+
+
+                int pixel = image.getRGB(j, i);
+                int red = (pixel >> 16) & 0xff;
+                int green = (pixel >> 8) & 0xff;
+                int blue = (pixel) & 0xff;
+
+
+                if (green <= 255 && green >= 160 && red <= 50 && blue <= 50) {
+                    System.out.println("green" + " " + "x,y: " + j + ", " + i);
+                    pixelrgb(pixel);
+                    System.out.println("");
+                    posx1 = i;
+                    posy1 = j;
+                    break;
+                }
+
+
+            }
+
+        }
+        for (int i = 0; i < i2; i++) {
+            for (int j = 0; j < i1; j++) {
+
+
+                int pixel = image.getRGB(j, i);
+                int red = (pixel >> 16) & 0xff;
+                int green = (pixel >> 8) & 0xff;
+                int blue = (pixel) & 0xff;
+
+
+                if (red <= 255 && red >= 200 && green <= 80 && blue <= 80) {
+                    System.out.println("red" + " " + "x,y: " + j + ", " + i);
+                    pixelrgb(pixel);
+                    System.out.println("");
+                    posx2 = i;
+                    posy2 = j;
+
+                 break;
+                }
+
+
+            }
+
+        }
+        posx = posx2 * 60 / i1 - posx1 * 60 / i1;
+        posy = posy2 * 30 / i2 - posy1 * 30 / i2;
+        if (posx < 0) posx = -posx;
+        if (posy < 0) posy = -posy;
+        if (posx1 == 0 || posx2 == 0) posx = 0;
+        if (posy1 == 0 || posy2 == 0) posy = 0;
+        System.out.println(posx + " " + posy);
+    }
+}
+
