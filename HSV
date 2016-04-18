@@ -1,0 +1,28 @@
+import com.googlecode.javacv.cpp.opencv_core;
+import com.googlecode.javacv.cpp.opencv_imgproc;
+
+
+
+
+import static com.googlecode.javacv.cpp.opencv_core.IPL_DEPTH_8U;
+import static com.googlecode.javacv.cpp.opencv_core.cvCreateImage;
+import static com.googlecode.javacv.cpp.opencv_core.cvGetSize;
+import static com.googlecode.javacv.cpp.opencv_highgui.cvLoadImage;
+import static com.googlecode.javacv.cpp.opencv_highgui.cvSaveImage;
+import static com.googlecode.javacv.cpp.opencv_highgui.cvShowImage;
+import static com.googlecode.javacv.cpp.opencv_imgproc.cvCvtColor;
+public class ss03 {
+
+
+        public static void main(String[] args) {
+            opencv_core.IplImage img = cvLoadImage("D:\\Desktop\\sample1.jpg");
+
+            opencv_core.IplImage hsvimg = cvCreateImage(cvGetSize(img), IPL_DEPTH_8U,3);
+            //opencv_core.IplImage grayimg = cvCreateImage(cvGetSize(img), IPL_DEPTH_8U,1);
+
+            cvCvtColor(img,hsvimg, opencv_imgproc.CV_BGR2HSV);
+            cvShowImage("D:\\Desktop\\sample1",hsvimg);
+            cvSaveImage("D:\\Desktop\\HSV1.jpg", hsvimg);
+
+        }
+}
